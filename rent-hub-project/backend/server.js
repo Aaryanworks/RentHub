@@ -1,4 +1,4 @@
-
+const cloudinary = require('cloudinary').v2;
 const jsonServer = require('json-server');
 const multer = require('multer');
 const path = require('path');
@@ -13,7 +13,7 @@ const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 
 // Configuration
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000
 const UPLOAD_DIR = path.join(__dirname, 'uploads');
 const DB_PATH = path.join(__dirname, 'db.json');
 console.log('Using DB file at:', DB_PATH);
