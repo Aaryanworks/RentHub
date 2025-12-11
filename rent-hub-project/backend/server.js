@@ -18,6 +18,39 @@ const UPLOAD_DIR = path.join(__dirname, 'uploads');
 const DB_PATH = path.join(__dirname, 'db.json');
 console.log('Using DB file at:', DB_PATH);
 
+// debugging helper — log every request
+server.use((req, res, next) => {
+    console.log('[REQ]', new Date().toISOString(), req.method, req.originalUrl);
+    next();
+});
+
+// after you register your routes, print available routes (add near end, before server.listen)
+function listRoutes() {
+    try {
+        const routes = [];
+        server._router.stack.forEach(mw => {
+            if (mw.route) {
+                const methods = Object.keys(mw.route.methods).join(',').toUpperCase();
+                routes.push(`${methods} ${mw.route.path}`);
+            } else if (mw.name === 'router' && mw.handle && mw.handle.stack) {
+                mw.handle.stack.forEach(r => {
+                    if (r.route) {
+                        const methods = Object.keys(r.route.methods).join(',').toUpperCase();
+                        routes.push(`${methods} ${r.route.path}`);
+                    }
+                });
+            }
+        });
+        console.log('=== REGISTERED ROUTES ===');
+        routes.forEach(r => console.log(r));
+        console.log('=== END ROUTES ===');
+    } catch (e) {
+        console.warn('Route listing failed', e);
+    }
+}
+listRoutes();
+
+
 // Ensure upload directory exists
 const ensureUploadDir = async () => {
   try {
