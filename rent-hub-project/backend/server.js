@@ -137,7 +137,7 @@ server.post('/upload-cloud', upload.single('image'), async (req, res) => {
         await fs.unlink(req.file.path).catch(() => { });
 
 
-        //return res.json({ url: result.secure_url });
+        return res.json({ url: result.secure_url });
 
 
     } catch (err) {
