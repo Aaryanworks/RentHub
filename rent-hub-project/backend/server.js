@@ -18,6 +18,13 @@ const UPLOAD_DIR = path.join(__dirname, 'uploads');
 const DB_PATH = path.join(__dirname, 'db.json');
 console.log('Using DB file at:', DB_PATH);
 
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME || 'dgz1yi72t',
+    api_key: process.env.CLOUDINARY_API_KEY || '313318558936514',
+    api_secret: process.env.CLOUDINARY_API_SECRET || 'GLBrG0moxa5w4wno8njRVG3kchU'
+});
+
 // debugging helper — log every request
 server.use((req, res, next) => {
     console.log('[REQ]', new Date().toISOString(), req.method, req.originalUrl);
@@ -112,6 +119,31 @@ server.post('/upload', upload.single('image'), (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+});
+
+server.post('/upload-cloud', upload.single('image'), async (req, res) => {
+    try {
+        if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+
+
+        const result = await cloudinary.uploader.upload(req.file.path, {
+            folder: 'renthub',
+            use_filename: true,
+            unique_filename: false
+        });
+
+
+        // remove local file after successful upload
+        await fs.unlink(req.file.path).catch(() => { });
+
+
+        //return res.json({ url: result.secure_url });
+
+
+    } catch (err) {
+        console.error('Cloud upload error', err);
+        return res.status(500).json({ error: 'Upload failed' });
+    }
 });
 
 // Login endpoint (needs body parser)

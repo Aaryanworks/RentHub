@@ -86,7 +86,7 @@ export class CreatePostComponent {
     const formData = new FormData();
     formData.append('image', file);
 
-    this.http.post<any>('http://localhost:3000/upload', formData).subscribe({
+    this.http.post<any>('https://renthub-x8c5.onrender.com//upload-cloud', formData).subscribe({
       next: (response) => {
         console.log('Upload successful:', response);
         this.uploadedImageUrl = response.url;
