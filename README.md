@@ -59,7 +59,8 @@ Rent-hub-project/
     │   │   ├── components/
     │   │   │   ├── home/           # Carousel, Search, Grid
     │   │   │   ├── create-post/    # Reactive Form + Preview Bonus
-    │   │   │   ├── listing-details/# Comments & Details
+    │   │   │   ├── listing-details/# Comments & 
+    Details     ├── listing-card
     │   │   │   ├── auth/           # Login & Signup
     │   │   │   
     │   │   ├── services/
