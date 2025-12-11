@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+@use "tailwindcss";
+
+/* Custom Theme Colors for Tailwind v4 */
+@theme {
+  --color-primary: #1e3a5f;
+  --color-secondary: #6b7280;
+  --color-accent: #0ea5e9;
+  --color-rent-blue: #005f73;
+  --color-rent-teal: #0a9396;
+  --color-rent-light: #e9d8a6;
+}
+
+/* Global Trendy Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+}

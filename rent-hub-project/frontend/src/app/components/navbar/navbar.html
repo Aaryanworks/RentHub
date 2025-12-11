@@ -1,0 +1,47 @@
+<nav class="bg-white sticky top-0 z-50 shadow-sm border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      
+ <!-- Logo -->
+<div class="flex items-center">
+  <a (click)="navigateToHome()" class="flex-shrink-0 flex items-center gap-2 group cursor-pointer">
+    <!-- Icon Circle -->
+    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md group-hover:bg-accent transition-colors">
+      RH
+    </div>
+    <!-- Text -->
+    <span class="font-bold text-2xl tracking-tight text-gray-900 group-hover:text-accent transition-colors">
+      RentHub
+    </span>
+  </a>
+</div>
+
+      <!-- Desktop Menu -->
+      <div class="hidden sm:flex sm:items-center sm:space-x-8">
+        <a (click)="navigateToHome()" class="text-secondary hover:text-primary px-3 py-2 text-sm font-medium transition-colors cursor-pointer">Home</a>
+        
+        <!-- Show only if Logged In -->
+        <ng-container *ngIf="isLoggedIn">
+          <a routerLink="/create-post" routerLinkActive="text-accent" class="text-secondary hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Post Ad</a>
+        </ng-container>
+      </div>
+
+      <!-- Auth Buttons -->
+      <div class="flex items-center space-x-4">
+        <ng-container *ngIf="!isLoggedIn">
+          <a routerLink="/login" class="text-secondary hover:text-primary font-medium text-sm">Log in</a>
+          <a routerLink="/signup" class="bg-primary hover:bg-slate-800 text-white px-4 py-2 rounded-full text-sm font-medium transition-all shadow-md hover:shadow-lg">
+            Sign Up
+          </a>
+        </ng-container>
+
+        <ng-container *ngIf="isLoggedIn">
+          <span class="text-sm text-secondary mr-2">Hi, {{ userName }}</span>
+          <button (click)="logout()" class="text-red-500 hover:text-red-700 font-medium text-sm border border-red-100 px-3 py-1 rounded-lg hover:bg-red-50 transition-colors">
+            Logout
+          </button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,56 @@
+<div class="group bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
+  
+  <!-- Image -->
+  <div class="relative h-48 overflow-hidden bg-gray-200">
+    <img [src]="listing.image" alt="Property" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+    
+    <!-- Price Badge -->
+    <div class="absolute bottom-3 left-3 bg-white/95 backdrop-blur px-3 py-1 rounded-lg shadow-sm">
+      <span class="font-bold text-slate-800">₹{{ listing.price }}</span>
+      <span class="text-xs text-gray-500 font-medium">/mo</span>
+    </div>
+
+    <!-- Heart Icon Button -->
+    <button 
+      (click)="toggleFav($event)"
+      class="absolute top-3 right-3 p-2 h-10 w-10 rounded-full transition-all duration-300 shadow-sm backdrop-blur-sm z-10"
+      [ngClass]="isFavorite ? 'bg-red-500 text-white hover:bg-red-600' : 'bg-black/30 text-white hover:bg-white hover:text-red-500'">
+      <span class="material-icons text-sm block">
+        {{ isFavorite ? 'favorite' : 'favorite_border' }}
+      </span>
+    </button>
+  </div>
+
+  <!-- Content -->
+  <div class="p-4 flex flex-col flex-grow">
+    <!-- Type & Location -->
+    <div class="flex justify-between items-start mb-2">
+      <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2 py-1 rounded">
+        {{ listing.type }}
+      </span>
+    </div>
+
+    <h3 class="font-bold text-slate-800 text-lg mb-1 truncate">{{ listing.title }}</h3>
+    
+    <div class="flex items-center text-gray-500 text-sm mb-4">
+      <span class="material-icons text-[16px] mr-1">location_on</span>
+      <span class="truncate">{{ listing.location }}</span>
+    </div>
+
+    <!-- Divider -->
+    <div class="border-t border-gray-50 mt-auto pt-4 flex items-center justify-between">
+      <div class="flex gap-2 text-gray-500 text-xs font-medium flex-wrap">
+        <span *ngFor="let amenity of listing.amenities?.slice(0, 2)" class="bg-gray-100 px-2 py-1 rounded">
+          {{ amenity }}
+        </span>
+        <span *ngIf="listing.amenities?.length > 2" class="bg-gray-100 px-2 py-1 rounded text-gray-400">
+          +{{ listing.amenities.length - 2 }}
+        </span>
+      </div>
+      
+      <a [routerLink]="['/details', listing.id]" class="text-indigo-600 hover:text-indigo-800 text-sm font-semibold flex items-center gap-1 group/link">
+        View Details <span class="material-icons text-[16px] transform group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+      </a>
+    </div>
+  </div>
+</div>

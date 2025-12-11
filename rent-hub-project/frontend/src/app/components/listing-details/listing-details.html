@@ -1,0 +1,163 @@
+<div class="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="max-w-7xl mx-auto text-center py-20">
+    <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+    <p class="mt-4 text-gray-600">Loading property details...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="max-w-2xl mx-auto">
+    <div class="bg-red-50 border border-red-200 rounded-2xl p-6 text-center">
+      <span class="material-icons text-red-500 text-5xl mb-4">error_outline</span>
+      <h2 class="text-xl font-bold text-red-700 mb-2">Oops! Something went wrong</h2>
+      <p class="text-red-600">{{ error }}</p>
+      <a routerLink="/home" class="inline-block mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+        Back to Home
+      </a>
+    </div>
+  </div>
+
+
+  
+
+  <!-- Content (only show when listing is loaded) -->
+  <div *ngIf="listing && !loading" class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+    
+    <!-- LEFT COLUMN: Image & Info -->
+    <div class="lg:col-span-2 space-y-6">
+      
+      <!-- Image Card -->
+      <div class="bg-white rounded-3xl overflow-hidden shadow-sm h-[400px] relative">
+        <img [src]="listing.image" class="w-full h-full object-cover">
+        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider text-indigo-800">
+          {{ listing.type }}
+        </div>
+      </div>
+
+      <!-- Details Card -->
+      <div class="bg-white rounded-3xl p-8 shadow-sm">
+        <div class="flex justify-between items-start mb-4">
+          <h1 class="text-3xl font-bold text-slate-900">{{ listing.title }}</h1>
+          <div class="text-right">
+            <div class="text-2xl font-bold text-indigo-600">₹{{ listing.price }}</div>
+            <div class="text-sm text-gray-400">/month</div>
+          </div>
+        </div>
+
+        <div class="flex items-center text-gray-500 mb-6">
+          <span class="material-icons text-indigo-500 mr-2">location_on</span>
+          {{ listing.location }}
+        </div>
+
+        <!-- Info Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 text-center">
+          <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
+            <span class="block text-xs text-gray-400 uppercase">Furnished</span>
+            <span class="font-bold text-slate-700">{{ listing.furnished }}</span>
+          </div>
+          <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
+            <span class="block text-xs text-gray-400 uppercase">Vegetarian</span>
+            <span class="font-bold text-slate-700">{{ listing.vegetarian }}</span>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-bold text-slate-800 mb-2">Description</h3>
+        <p class="text-slate-600 leading-relaxed mb-8">{{ listing.description }}</p>
+
+        <h3 class="text-lg font-bold text-slate-800 mb-4">Amenities</h3>
+        <div class="flex flex-wrap gap-2">
+          <span *ngFor="let am of listing.amenities" class="px-4 py-2 bg-indigo-50 text-indigo-700 rounded-full text-sm font-medium">
+            {{ am }}
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN: Actions & Comments -->
+    <div class="space-y-6">
+      
+      <!-- Contact/Action Card -->
+       <div class="bg-white rounded-3xl p-6 shadow-sm border border-indigo-100 ">
+        <button 
+  (click)="copyLink()"
+  class="w-full border-2 text-gray-500 py-3 rounded-xl font-bold mb-3">
+  Share Listing
+</button>
+        
+      <button 
+     *ngIf= "isLoggedIn"
+    
+  (click)="toggleFav()"
+  
+  class="w-full border-2 py-3 rounded-xl font-bold transition-all flex justify-center items-center gap-2"
+  [ngClass]="isFavorite ? 'border-red-500 bg-red-50 text-red-600' : 'border-gray-200 text-gray-500 hover:border-red-400 hover:text-red-500'">
+  
+  <span class="material-icons">
+    {{ isFavorite ? 'favorite' : 'favorite_border' }}
+  </span> 
+  
+  {{ isFavorite ? 'Saved to Favorites' : 'Mark as Favorite' }}
+      
+</button>
+      
+      </div>
+    
+
+      <!-- COMMENTS SECTION -->
+      <div class="bg-white rounded-3xl p-6 shadow-sm h-[600px] flex flex-col">
+        <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+          <span class="material-icons text-indigo-500">chat</span> Discussion
+        </h3>
+
+        <!-- Comments List (Scrollable) -->
+        <div class="flex-grow overflow-y-auto space-y-4 pr-2 mb-4 custom-scrollbar">
+          
+          <div *ngIf="comments.length === 0" class="text-center text-gray-400 py-10">
+            No comments yet. Be the first to ask!
+          </div>
+
+          <div *ngFor="let c of comments" class="bg-gray-50 p-4 rounded-2xl border border-gray-100">
+            <div class="flex justify-between items-center mb-1">
+              <span class="font-bold text-slate-800 text-sm">{{ c.username }}</span>
+              <span class="text-xs text-gray-400">{{ c.date | date:'shortDate' }}</span>
+            </div>
+            <p class="text-slate-600 text-sm">{{ c.text }}</p>
+          </div>
+
+        </div>
+
+        <!-- Add Comment Input -->
+        <div *ngIf="isLoggedIn; else loginToComment" class="mt-auto">
+          <div class="flex gap-2">
+            <input 
+              type="text" 
+              [(ngModel)]="newCommentText" 
+              (keyup.enter)="addComment()"
+              placeholder="Ask a question..." 
+              class="flex-1 px-4 py-3 bg-gray-50 rounded-xl border border-gray-200 focus:bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
+            >
+            <button 
+              (click)="addComment()"
+              [disabled]="!newCommentText"
+              class="px-4 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl disabled:opacity-50 transition-colors flex items-center justify-center">
+              <span class="material-icons text-sm">send</span>
+            </button>
+          </div>
+        </div>
+
+        <ng-template #loginToComment>
+          <div class="text-center p-4 bg-indigo-50 rounded-xl">
+            <p class="text-indigo-800 text-sm mb-2">Login to join the discussion</p>
+            <a routerLink="/login" class="text-xs font-bold text-indigo-600 underline">Log In Now</a>
+          </div>
+        </ng-template>
+
+      </div>
+
+    </div>
+
+  </div> <!-- End of content grid -->
+  
+</div> <!-- End of main container -->

@@ -1,0 +1,164 @@
+{
+  "users": [
+    {
+      "email": "test@gmail.com",
+      "password": "$2a$10$pq2OcBiNvgnHlf8/VjYtoOlAyVmjcEV9tMwlXn00iHbk/V/hzo7hu",
+      "name": "Aaryan",
+      "id": 1
+    },
+    {
+      "email": "test2@gmail.com",
+      "password": "$2a$10$xKIw4rHfOLTJIveZba5VjO57U3p5/CEM9XZrOToaK8q/W57vOccRG",
+      "name": "test2",
+      "id": 2
+    },
+    {
+      "email": "test3@gmail.com",
+      "password": "$2a$10$jX8sUau1H0zt5Gp9QaqJaO3yIPU82U1k183fSPHb8z1MjaHQR9BmO",
+      "name": "Aaryan Sharma",
+      "id": 3
+    },
+    {
+      "email": "sahilTest@gmail.com",
+      "password": "$2a$10$ufkGKAaTo3PLBVJmTg/sheEXLRV4AhqWR9.0tiJVe7kj4sYWZgLPW",
+      "name": "366363",
+      "id": 4
+    },
+    {
+      "email": "sahil@gmail.com",
+      "password": "$2a$10$vjmD..UrvSi8GkVCJNVYmeXQRAG9RjNtXsdUVtVwyCsKSgH0e3GRC",
+      "name": "Sahil",
+      "id": 5
+    },
+    {
+      "email": "john@example.com",
+      "password": "$2a$10$oHnVyta2pAiQGQ8zBDkGTull7NelNF5B8Tn/yL3qJclLoH4weVk4C",
+      "name": "John Doe",
+      "id": 6
+    },
+    {
+      "email": "NewTest@gmail.com",
+      "password": "$2a$10$2SL/l..7qYpRLWTlgMrvI.UkJlLQNc2oILpO9ZBDcLMAc4i6E4M0m",
+      "name": "New Test",
+      "id": 7
+    },
+    {
+      "email": "AaryanTest@test.com",
+      "password": "$2a$10$lF3/DM6hgCe9EDHsb3v7.O7rvnF7hdEO0C/l/M0oQE80UL5mJ6wxm",
+      "name": "Aaryan Sharma ",
+      "id": 8
+    },
+    {
+      "id": 9,
+      "email": "Aaryannew@gmail.com",
+      "password": "Aaryan@1976",
+      "name": "AaryanNew"
+    },
+    {
+      "id": 10,
+      "email": "addy@gmail",
+      "password": "$2b$10$AHE8HZWMsNKmNIr6y/Iixer5MHdLb6KPXdRBSPh6afnO5iHQ1Tf/a",
+      "name": "Aditya"
+    },
+    {
+      "id": 11,
+      "email": "Addy@gmail",
+      "password": "$2b$10$T..6SSt1uMjKsBrvalm0ReQuWD1.s.rY/YiXJr6Nd5Jv6ou2y7khW",
+      "name": "aditya"
+    },
+    {
+      "id": 12,
+      "email": "saheli1@gmail.com",
+      "password": "$2b$10$nF9sFSQB1Umc0yKU9JDkbO3X07.8sYMkNHDn7s1qEes3AETgHQ/3.",
+      "name": "rrreeeee motherboard"
+    },
+    {
+      "id": 13,
+      "email": "rerere@gmail.com",
+      "password": "$2b$10$NSzekiWjamzwayRPOr/KruUQKiav42GueP6UTCFwHunIEntBBw.1m",
+      "name": "Sahil Manchanda"
+    }
+  ],
+  "listings": [
+    {
+      "id": 1,
+      "title": "Modern Apartment in City Center",
+      "description": "A beautiful 2BHK apartment with a great view of the skyline. Fully furnished and ready to move in.",
+      "location": "Delhi, India",
+      "price": 2500,
+      "type": "Apartment",
+      "furnished": "Yes",
+      "amenities": [
+        "Gym",
+        "Parking",
+        "Swimming Pool"
+      ],
+      "vegetarian": "No",
+      "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
+      "hostId": 100
+    },
+    {
+      "title": "Yellow door apartments",
+      "description": "Beautiful place with scenic view",
+      "location": "Gurgoan, Haryana - 121009",
+      "price": 80000,
+      "type": "Apartment",
+      "furnished": "Yes",
+      "vegetarian": "Yes",
+      "image": "http://localhost:3000/uploads/1765434597239-27810794.jpg",
+      "amenities": [
+        "AC",
+        "WiFi",
+        "Gym"
+      ],
+      "hostId": 8,
+      "id": 5603,
+      "createdAt": "2025-12-11T06:30:01.072Z"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "listingId": 1,
+      "userId": 2,
+      "username": "John Doe",
+      "text": "Is the parking fee included in the rent?",
+      "date": "2023-10-12T10:00:00Z",
+      "replies": [
+        {
+          "username": "Host",
+          "text": "Yes, one slot is included.",
+          "date": "2023-10-12T11:00:00Z"
+        }
+      ]
+    },
+    {
+      "listingId": 1,
+      "userId": 7,
+      "username": "New Test",
+      "text": "Hey ",
+      "date": "2025-12-05T06:09:25.584Z",
+      "replies": [],
+      "id": 2
+    },
+    {
+      "listingId": 1,
+      "userId": 5,
+      "username": "Sahil",
+      "text": "Is it Fully furnished",
+      "date": "2025-12-05T06:50:55.108Z",
+      "replies": [],
+      "id": 3
+    },
+    {
+      "listingId": 5603,
+      "userId": 8,
+      "username": "Aaryan Sharma ",
+      "text": "Price is too high",
+      "date": "2025-12-11T06:31:08.944Z",
+      "replies": [],
+      "id": 4
+    }
+  ],
+  "favorites": []
+}
